@@ -1,0 +1,31 @@
+CANDIDATE EVIDENCE (use only this; never invent more)
+(Example: a fictional candidate. Replace this file with your own CV facts.)
+
+Location and eligibility
+- Lives in Athens, Greece. EU citizen. Open to on-site or hybrid jobs in Athens, to fully
+  remote jobs that can be done from Greece, and to relocating within the EU or Switzerland.
+- Languages: Greek (native), English (C1). German only A2 (not enough for a job that needs it).
+- No completed university degree.
+
+Experience
+- 2018 - 2024: ran a small online shop selling home goods on Amazon, eBay and a Shopify store:
+  listings and catalog, pricing, orders, returns, customer messages, supplier sourcing.
+  Thousands of orders, top-rated seller status.
+- Built spreadsheet tools for repricing and stock planning (Excel formulas and macros).
+- Since 2024: freelance automation projects: n8n and Google Apps Script workflows that move
+  data between APIs and Google Sheets; small Python scripts built with AI coding assistants.
+- No experience as an employee inside a company team, no people management.
+
+Skills
+- Excel (advanced), Google Sheets, SQL (practical), Python (practical), REST APIs, n8n,
+  Shopify, Git/GitHub, prompt writing and AI tools for building automations.
+
+What the candidate wants
+- Level: entry, junior or mid. Senior titles only when the duties are a very good match.
+- Best fields: e-commerce / marketplace operations, catalog and product data, pricing,
+  operations, revenue operations, customer success and account management.
+- Dream: AI automation / AI operations roles. Rate high only when the ad asks for practical
+  workflow building (n8n, Zapier, Make, prompts, APIs, spreadsheets), not for ML engineering.
+- Pay: would like at least about EUR 1,200 net per month. NEVER lower the fit or the eligibility
+  because of pay.
+- Does not want: cold calling, commission-only sales, phone-heavy call-center support.

@@ -1,0 +1,59 @@
+name: Job Scout
+
+on:
+  schedule:
+    # 04:37 UTC = 06:37 in Athens (winter) / 07:37 (summer), Monday to Friday.
+    # Not on the hour: GitHub delays or drops scheduled runs at :00 when busy.
+    - cron: "37 4 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (no sheet, results as a downloadable file)"
+        type: boolean
+        default: false
+      rerate:
+        description: "Ask the AI again about every job still New (one-off catch-up)"
+        type: boolean
+        default: false
+  push:
+    branches: ["claude/**"]
+
+permissions:
+  contents: read
+
+# Never two real runs at once (GitHub's schedule and the sheet's backup start can overlap).
+concurrency:
+  group: job-scout-${{ github.event_name == 'push' && github.ref || 'sheet' }}
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q
+      - name: Run (dry run on test branches or when asked)
+        if: github.event_name == 'push' || inputs.dry_run
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -m scout.run --dry-run
+      - name: Run and write to the sheet
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && !inputs.dry_run)
+        env:
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m scout.run ${{ inputs.rerate && '--rerate' || '' }}
+      - uses: actions/upload-artifact@v4
+        if: always() && (github.event_name == 'push' || inputs.dry_run)
+        with:
+          name: dry-run-results
+          path: out/
+          retention-days: 7
