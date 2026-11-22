@@ -28,6 +28,8 @@ concurrency:
 
 jobs:
   scout:
+    # Scheduled runs only start once the repository variable SCHEDULE_ON is set to true.
+    if: github.event_name != 'schedule' || vars.SCHEDULE_ON == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

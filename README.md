@@ -72,6 +72,8 @@ Pasted into the spreadsheet's Apps Script editor, it:
 4. Replace `data/profile.txt` with your own CV facts and wishes (the file in this repo is a
    fictional example), and `data/extra_companies.csv` with the companies you want followed.
 5. Run **Actions > Job Scout > Run workflow** once. The tabs are created on the first run.
+6. To turn on the weekday schedule, add the repository variable `SCHEDULE_ON` = `true`
+   (Settings > Secrets and variables > Actions > Variables).
 
 Nothing secret is stored in the repository: the sheet ID and keys are only GitHub secrets.
 
